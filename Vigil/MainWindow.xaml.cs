@@ -22,7 +22,7 @@ namespace Vigil
         // A function would likely work better, but for proof of concept, this should work.
         readonly Dictionary<string, string> find3ApiCalls = new Dictionary<string, string>()
         {
-            { "simpleLocationOfSingleDevice", "/api/v1/location_basic/" }, // after appending /FAMILY/DEVICE gets location of device (loc), probability (p), and last seen in seconds (seen). Also gets GPS (lat) (lon)
+            { "simpleLocationOfSingleDevice", "api/v1/location_basic/" }, // after appending /FAMILY/DEVICE gets location of device (loc), probability (p), and last seen in seconds (seen). Also gets GPS (lat) (lon)
         };
         
         public MainWindow()
@@ -40,7 +40,8 @@ namespace Vigil
             familyName = TextBox_FamilyName.Text;
             deviceName = TextBox_DeviceName.Text;
             
-            string uri = serverAddress + find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
+            //TODO check if trailing / exists in serverAddress before adding
+            string uri = serverAddress + "/" + find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
             // TODO add some sort of "Communicating With Server" message to MainDisplay to inform user that the app didn't freeze, it's just waiting.
             response = @Get(uri); // not sure if @ is in the right place...
 
