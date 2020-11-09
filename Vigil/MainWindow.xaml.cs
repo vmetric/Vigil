@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Vigil
 {
@@ -40,8 +28,6 @@ namespace Vigil
         public MainWindow()
         {
             InitializeComponent();
-            
-            
         }
 
         // Fires when Button_GetDeviceLocation is clicked
@@ -55,10 +41,8 @@ namespace Vigil
             deviceName = TextBox_DeviceName.Text;
             
             string uri = serverAddress + find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
-
-            TextBlock_MainDisplay.Text = "Communicating w/ server...";
-
-            response = @Get(uri);
+            // TODO add some sort of "Communicating With Server" message to MainDisplay to inform user that the app didn't freeze, it's just waiting.
+            response = @Get(uri); // not sure if @ is in the right place...
 
             simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(response);
 
@@ -74,6 +58,7 @@ namespace Vigil
             using (Stream stream = response.GetResponseStream())
             using (StreamReader reader = new StreamReader(stream))
             {
+                // TODO directly deserialize, rather than Get -> string -> deserialize
                 return reader.ReadToEnd();
             }
         }
