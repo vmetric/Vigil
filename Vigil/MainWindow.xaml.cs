@@ -48,28 +48,21 @@ namespace Vigil
         private void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
         {
             SimpleLocationOfDevice simpleDevice;
-            
+            string response;
+
             serverAddress = TextBox_ServerAddress.Text;
             familyName = TextBox_FamilyName.Text;
             deviceName = TextBox_DeviceName.Text;
-            string response;
             
-
             string uri = serverAddress + find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
 
-            MessageBox.Show("URI built: " + uri);
+            TextBlock_MainDisplay.Text = "Communicating w/ server...";
 
             response = @Get(uri);
-            MessageBox.Show( "GET response: " + response);
-            MessageBox.Show("deserializing");
 
             simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(response);
-            MessageBox.Show("message: " + simpleDevice.message);
-            MessageBox.Show("location: " + simpleDevice.data.loc);
 
-
-
-
+            TextBlock_MainDisplay.Text = $"Location Acquired: {simpleDevice.data.loc}";
         }
 
         public string Get(string uri)
