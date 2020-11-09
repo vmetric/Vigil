@@ -11,7 +11,7 @@
         <TextBox x:Name="TextBox_FamilyName" HorizontalAlignment="Center" Margin="0,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
         <TextBox x:Name="TextBox_DeviceName" HorizontalAlignment="Center" Margin="0,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
 
-        <Button x:Name="Button_GetDeviceLocation" Content="Get Device Location" HorizontalAlignment="Center" Margin="0,316,0,0" VerticalAlignment="Top" Height="43" Width="177" FontSize="18"/>
+        <Button x:Name="Button_GetDeviceLocation" Content="Get Device Location" HorizontalAlignment="Center" Margin="0,316,0,0" VerticalAlignment="Top" Height="43" Width="177" FontSize="18" Click="Button_GetDeviceLocation_Click"/>
 
         <Rectangle HorizontalAlignment="Center" Panel.ZIndex="-1" Height="100" Margin="0,20,0,0" Stroke="Black" VerticalAlignment="Top" Width="292" Fill="#FFA8C64E"/>
 
