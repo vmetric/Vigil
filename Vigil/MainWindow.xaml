@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,316,0,0" VerticalAlignment="Top" Height="43" Width="148" FontSize="18"/>
+        <Label Content="Label" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Bahnschrift Condensed" Width="54"/>
+        <Rectangle HorizontalAlignment="Center" Panel.ZIndex="-1" Height="100" Margin="0,49,0,0" Stroke="Black" VerticalAlignment="Top" Width="292" Fill="#FFA8C64E"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
+        <Label Content="Device Name:" HorizontalAlignment="Left" Margin="139,231,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
+        <Label Content="Family Name:" HorizontalAlignment="Left" Margin="141,183,0,0" VerticalAlignment="Top" FontSize="18"/>
 
     </Grid>
 </Window>
