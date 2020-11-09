@@ -7,7 +7,7 @@ namespace Vigil
     // this file contains classes necessary to handle the response to a Get simple location of a single device from a FIND3 server.
 
     // Overall response from server after GETing simpleDeviceLocation
-    public class SimpleDevice
+    public class SimpleLocationOfDevice
     {
         // "Data" section of response -- see below for class
         public data data { get; set; }

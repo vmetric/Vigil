@@ -25,6 +25,7 @@ namespace Vigil
     public partial class MainWindow : Window
     {
         // Strings to hold input from TextBoxes
+        // TODO replace textboxes with dropdowns, populated upon clicking a "connect to server button"
         string serverAddress;
         string familyName;
         string deviceName;
@@ -46,7 +47,8 @@ namespace Vigil
         // Fires when Button_GetDeviceLocation is clicked
         private void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
         {
-            SimpleDevice simpleDevice;
+            SimpleLocationOfDevice simpleDevice;
+            
             serverAddress = TextBox_ServerAddress.Text;
             familyName = TextBox_FamilyName.Text;
             deviceName = TextBox_DeviceName.Text;
@@ -61,7 +63,7 @@ namespace Vigil
             MessageBox.Show( "GET response: " + response);
             MessageBox.Show("deserializing");
 
-            simpleDevice = JsonSerializer.Deserialize<SimpleDevice>(response);
+            simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(response);
             MessageBox.Show("message: " + simpleDevice.message);
             MessageBox.Show("location: " + simpleDevice.data.loc);
 
