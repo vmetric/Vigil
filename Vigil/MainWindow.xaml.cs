@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 
 
@@ -31,8 +32,10 @@ namespace Vigil
         }
 
         // Fires when Button_GetDeviceLocation is clicked
-        private void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
+        private async void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
         {
+            TextBlock_MainDisplay.Text = "Communicating with server...";
+            
             SimpleLocationOfDevice simpleDevice;
             string response;
 
@@ -42,26 +45,21 @@ namespace Vigil
             
             //TODO check if trailing / exists in serverAddress before adding
             string uri = serverAddress + "/" + find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
-            // TODO add some sort of "Communicating With Server" message to MainDisplay to inform user that the app didn't freeze, it's just waiting.
-            response = @Get(uri); // not sure if @ is in the right place...
 
+            // TODO add some sort of "Communicating With Server" message to MainDisplay to inform user that the app didn't freeze, it's just waiting.
+            response = await @Get(uri); // not sure if @ is in the right place...
+            // TODO directly deserialize, rather than Get -> string -> deserialize
             simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(response);
 
             TextBlock_MainDisplay.Text = $"Location Acquired: {simpleDevice.data.loc}";
+
         }
 
-        public string Get(string uri)
+        public async Task<string> Get(string uri)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                // TODO directly deserialize, rather than Get -> string -> deserialize
-                return reader.ReadToEnd();
-            }
+            var httpClient = new HttpClient();
+            var stream = await httpClient.GetStreamAsync(uri).ConfigureAwait(false);
+            return (new StreamReader(stream).ReadToEnd());
         }
     }
 }
