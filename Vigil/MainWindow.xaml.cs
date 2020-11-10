@@ -34,10 +34,9 @@ namespace Vigil
         // Fires when Button_GetDeviceLocation is clicked
         private async void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
         {
-            TextBlock_MainDisplay.Text = "Communicating with server...";
+            TextBlock_MainDisplay.Text = "Working...";
             
             SimpleLocationOfDevice simpleDevice;
-            string response;
 
             serverAddress = TextBox_ServerAddress.Text;
             familyName = TextBox_FamilyName.Text;
@@ -46,10 +45,7 @@ namespace Vigil
             //TODO check if trailing / exists in serverAddress before adding
             string uri = serverAddress + "/" + find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
 
-            // TODO add some sort of "Communicating With Server" message to MainDisplay to inform user that the app didn't freeze, it's just waiting.
-            response = await @Get(uri); // not sure if @ is in the right place...
-            // TODO directly deserialize, rather than Get -> string -> deserialize
-            simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(response);
+            simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(uri));
 
             TextBlock_MainDisplay.Text = $"Location Acquired: {simpleDevice.data.loc}";
 
