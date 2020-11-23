@@ -39,14 +39,23 @@ namespace Vigil
 
         public void MovePin((int, int) newCoordinate)
         {
-            var top = Canvas.GetTop(Image_Pin);
-            var left = Canvas.GetLeft(Image_Pin);
-            TranslateTransform trans = new TranslateTransform();
-            Image_Pin.RenderTransform = trans;
-            DoubleAnimation anim1 = new DoubleAnimation(top, newCoordinate.Item1 - top, TimeSpan.FromSeconds(0.25));
-            DoubleAnimation anim2 = new DoubleAnimation(left, newCoordinate.Item2 - left, TimeSpan.FromSeconds(0.25));
-            trans.BeginAnimation(TranslateTransform.XProperty, anim1);
-            trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+            var leftX = Canvas.GetLeft(Image_Pin);
+            var topY = Canvas.GetTop(Image_Pin);
+            
+            if (leftX != newCoordinate.Item1 && topY != newCoordinate.Item2)
+            {
+                TranslateTransform trans = new TranslateTransform();
+                Image_Pin.RenderTransform = trans;
+                //DoubleAnimation anim1 = new DoubleAnimation(leftX, newCoordinate.Item1, TimeSpan.FromSeconds(0.25));
+                //DoubleAnimation anim2 = new DoubleAnimation(topY, newCoordinate.Item2, TimeSpan.FromSeconds(0.25));
+                //trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+                //trans.BeginAnimation(TranslateTransform.XProperty, anim1);
+                
+                // Move pin
+                Canvas.SetLeft(Image_Pin, newCoordinate.Item1);
+                Canvas.SetTop(Image_Pin, newCoordinate.Item2);
+            }
+
         }
     }
 }

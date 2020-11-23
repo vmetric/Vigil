@@ -94,11 +94,6 @@ namespace Vigil
             updateLiveMapTimer.AutoReset = true;
             updateLiveMapTimer.Start();
             TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
-            MessageBox.Show("Attempting to move pin");
-
-            liveMap.MovePin((400, 400));
-
-            MessageBox.Show("Pin should be moved.");
         }
 
         // Simple method that handles GET'ing from server.
