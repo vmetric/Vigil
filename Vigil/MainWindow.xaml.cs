@@ -4,7 +4,8 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Timers;
+using System;
 
 namespace Vigil
 {
@@ -18,6 +19,13 @@ namespace Vigil
         string serverAddress;
         string familyName;
         string deviceName;
+        string deviceLocation;
+        LiveMap liveMap;
+        SimpleLocationOfDevice simpleDevice;
+
+        string uri = "";
+        int tempCounter = 0;
+        int tempCounter2 = 0;
 
         // Dictionary holding FIND3 API calls
         // A function would likely work better, but for proof of concept, this should work.
@@ -36,9 +44,7 @@ namespace Vigil
         {
             TextBlock_MainDisplay.Text = "Working...";
             
-            SimpleLocationOfDevice simpleDevice;
-            
-            string uri = "";
+
             serverAddress = TextBox_ServerAddress.Text;
 
             // If the first character of serverAddress is a number, it's safe to assume it's an IP address
@@ -72,17 +78,59 @@ namespace Vigil
 
             // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
             simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(uri));
+            // Save device location to variable
+            deviceLocation = simpleDevice.data.loc;
 
             // Update MainDisplay with given device location.
-            TextBlock_MainDisplay.Text = $"Location Acquired: {simpleDevice.data.loc}";
+            TextBlock_MainDisplay.Text = $"Location Acquired: {deviceLocation}";
 
+            // Launch our LiveMap window, and give it our current location.
+            liveMap = new LiveMap();
+            liveMap.Show();
+            liveMap.Update(simpleDevice.data.loc);
+
+            // UpdateLiveMap every second
+            int updateInterval = 1000;
+            Timer updateLiveMapTimer = new Timer(updateInterval);
+            updateLiveMapTimer.Elapsed += UpdateLiveMap;
+            updateLiveMapTimer.AutoReset = true;
+            updateLiveMapTimer.Start();
+            TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
         }
 
-        public async Task<string> Get(string uri)
+        // Simple method that handles GET'ing from server.
+        private async Task<string> Get(string uri)
         {
             var httpClient = new HttpClient();
             var stream = await httpClient.GetStreamAsync(uri).ConfigureAwait(false);
             return (new StreamReader(stream).ReadToEnd());
+        }
+
+        // Simple method to update deviceLocation
+        private async Task UpdateDeviceLocation()
+        {
+            // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
+            simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(uri));
+            // Save device location to variable
+            deviceLocation = simpleDevice.data.loc;
+
+            tempCounter2++;
+        }
+
+        // Method meant to be used for updating the "live map"
+        private async void UpdateLiveMap(object source, ElapsedEventArgs e)
+        {
+            await UpdateDeviceLocation();
+
+            if (deviceName != "" || deviceName != null)
+            {
+                Dispatcher.Invoke(() => liveMap.Update($"1/{tempCounter} 2/{tempCounter2} -- {deviceName}"));
+                
+                tempCounter++;
+            } else
+            {
+                liveMap.Update("Err: deviceName empty");
+            }
         }
     }
 }
