@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vigil"
         mc:Ignorable="d"
-        Title="LiveMap" Height="450" Width="800">
+        Title="LiveMap" Height="720" Width="1280">
     <Grid>
-        <Label x:Name="Label_Location" Content="-location not yet received-" HorizontalAlignment="Left" Margin="267,144,0,0" VerticalAlignment="Top" Height="140" Width="285" FontSize="24"/>
+        <Label Panel.ZIndex="1" x:Name="Label_Location" Content="-location not yet received-" HorizontalAlignment="Center" VerticalAlignment="Top" Height="45" Width="290" FontSize="24" Margin="0,79,0,0"/>
+        <Image Panel.ZIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" Source="/Images/Outline1.png"/>
+
+        <Canvas x:Name="Canvas_PinCanvas" Panel.ZIndex="1">
+            <Image x:Name="Image_Pin" Panel.ZIndex="2" Height="50" Width="50" Canvas.Left="0" Canvas.Top="0" Source="/Images/ic_find3-playstore.png"/>
+        </Canvas>
+
 
     </Grid>
 </Window>

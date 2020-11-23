@@ -6,4 +6,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\ic_find3-playstore.png" />
+    <None Remove="Images\Outline1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ic_find3-playstore.png" />
+    <Resource Include="Images\Outline1.png" />
+  </ItemGroup>
+
 </Project>

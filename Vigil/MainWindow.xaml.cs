@@ -24,8 +24,6 @@ namespace Vigil
         SimpleLocationOfDevice simpleDevice;
 
         string uri = "";
-        int tempCounter = 0;
-        int tempCounter2 = 0;
 
         // Dictionary holding FIND3 API calls
         // A function would likely work better, but for proof of concept, this should work.
@@ -96,6 +94,11 @@ namespace Vigil
             updateLiveMapTimer.AutoReset = true;
             updateLiveMapTimer.Start();
             TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
+            MessageBox.Show("Attempting to move pin");
+
+            liveMap.MovePin((400, 400));
+
+            MessageBox.Show("Pin should be moved.");
         }
 
         // Simple method that handles GET'ing from server.
@@ -113,8 +116,6 @@ namespace Vigil
             simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(uri));
             // Save device location to variable
             deviceLocation = simpleDevice.data.loc;
-
-            tempCounter2++;
         }
 
         // Method meant to be used for updating the "live map"
@@ -124,9 +125,7 @@ namespace Vigil
 
             if (deviceName != "" || deviceName != null)
             {
-                Dispatcher.Invoke(() => liveMap.Update($"1/{tempCounter} 2/{tempCounter2} -- {deviceName}"));
-                
-                tempCounter++;
+                Dispatcher.Invoke(() => liveMap.Update($"{simpleDevice.data.loc}"));
             } else
             {
                 liveMap.Update("Err: deviceName empty");
