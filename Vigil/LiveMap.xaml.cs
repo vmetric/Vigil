@@ -18,8 +18,10 @@ namespace Vigil
     /// </summary>
     public partial class LiveMap : Window
     {
-        // Eventually user-settable, this variable will control if pins animate to their new location or simply jump.
+        // If true, the Pin will animate to new locations. If false, Pin jumps to new locations. TODO Make user-settable
         bool animatePins = true;
+        // Time, in seconds, it takes Pin animations to complete. TODO Make user-settable
+        double animationDurationSecond = 0.5;
         // Dictionary holding the coordinates of each location. Current hardcoded.
         readonly Dictionary<string, (int, int)> locationCoordinates = new Dictionary<string, (int, int)>()
         {
@@ -50,26 +52,29 @@ namespace Vigil
             {
                 if (animatePins)
                 {
-                    TranslateTransform trans = new TranslateTransform();
-                    Image_Pin.RenderTransform = trans;
-                    DoubleAnimation anim1 = new DoubleAnimation(currentLeft, newLeft, TimeSpan.FromSeconds(0.50));
+                    Storyboard storyboard = new Storyboard();
+
+                    // Anim1 is responsible for left-right movement (using "distance from left")
+                    DoubleAnimation anim1 = new DoubleAnimation(currentLeft, newLeft, TimeSpan.FromSeconds(animationDurationSecond));
                     anim1.FillBehavior = FillBehavior.Stop;
                     anim1.Completed += (s, e) => Canvas.SetLeft(Image_Pin, newLeft);
-                    DoubleAnimation anim2 = new DoubleAnimation(currentTop, newTop, TimeSpan.FromSeconds(0.50));
+                    Storyboard.SetTarget(anim1, Image_Pin);
+                    Storyboard.SetTargetProperty(anim1, new PropertyPath(Canvas.LeftProperty));
+                    storyboard.Children.Add(anim1);
+                    // Anim2 is responsible for up-down movement (using "distance from top")
+                    DoubleAnimation anim2 = new DoubleAnimation(currentTop, newTop, TimeSpan.FromSeconds(animationDurationSecond));
                     anim2.FillBehavior = FillBehavior.Stop;
                     anim2.Completed += (s, e) => Canvas.SetTop(Image_Pin, newTop);
+                    Storyboard.SetTarget(anim2, Image_Pin);
+                    Storyboard.SetTargetProperty(anim2, new PropertyPath(Canvas.TopProperty));
+                    storyboard.Children.Add(anim2);
 
-                    trans.BeginAnimation(TranslateTransform.XProperty, anim1);
-                    trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+                    storyboard.Begin();
                 } else
                 {
-                    //MessageBox.Show("Setting Left");
-
                     // Move pin
                     Canvas.SetLeft(Image_Pin, newLeft);
-                    //MessageBox.Show("Setting Top");
                     Canvas.SetTop(Image_Pin, newTop);
-                    //MessageBox.Show("done!");
                 }
 
             }
