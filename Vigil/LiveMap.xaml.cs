@@ -18,10 +18,13 @@ namespace Vigil
     /// </summary>
     public partial class LiveMap : Window
     {
-        // If true, the Pin will animate to new locations. If false, Pin jumps to new locations. TODO Make user-settable
-        bool animatePins = true;
-        // Time, in seconds, it takes Pin animations to complete. TODO Make user-settable
-        double animationDurationSecond = 0.5;
+        static Settings settings = new Settings();
+        // If true, the Pin will animate to new locations. If false, Pin jumps to new locations.
+        bool animatePins = settings.animatePins;
+
+        // Time, in seconds, it takes Pin animations to complete.
+        double animationDurationSeconds = settings.animationDurationSeconds;
+
         // Dictionary holding the coordinates of each location. Current hardcoded.
         readonly Dictionary<string, (int, int)> locationCoordinates = new Dictionary<string, (int, int)>()
         {
