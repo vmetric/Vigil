@@ -18,6 +18,8 @@ namespace Vigil
     /// </summary>
     public partial class LiveMap : Window
     {
+        // Eventually user-settable, this variable will control if pins animate to their new location or simply jump.
+        bool animatePins = true;
         // Dictionary holding the coordinates of each location. Current hardcoded.
         readonly Dictionary<string, (int, int)> locationCoordinates = new Dictionary<string, (int, int)>()
         {
@@ -39,21 +41,37 @@ namespace Vigil
 
         public void MovePin((int, int) newCoordinate)
         {
-            var leftX = Canvas.GetLeft(Image_Pin);
-            var topY = Canvas.GetTop(Image_Pin);
+            var currentLeft = Canvas.GetLeft(Image_Pin);
+            var currentTop = Canvas.GetTop(Image_Pin);
+            var newLeft = newCoordinate.Item1;
+            var newTop = newCoordinate.Item2;
             
-            if (leftX != newCoordinate.Item1 && topY != newCoordinate.Item2)
+            if (currentLeft != newLeft && currentTop != newTop)
             {
-                TranslateTransform trans = new TranslateTransform();
-                Image_Pin.RenderTransform = trans;
-                //DoubleAnimation anim1 = new DoubleAnimation(leftX, newCoordinate.Item1, TimeSpan.FromSeconds(0.25));
-                //DoubleAnimation anim2 = new DoubleAnimation(topY, newCoordinate.Item2, TimeSpan.FromSeconds(0.25));
-                //trans.BeginAnimation(TranslateTransform.YProperty, anim2);
-                //trans.BeginAnimation(TranslateTransform.XProperty, anim1);
-                
-                // Move pin
-                Canvas.SetLeft(Image_Pin, newCoordinate.Item1);
-                Canvas.SetTop(Image_Pin, newCoordinate.Item2);
+                if (animatePins)
+                {
+                    TranslateTransform trans = new TranslateTransform();
+                    Image_Pin.RenderTransform = trans;
+                    DoubleAnimation anim1 = new DoubleAnimation(currentLeft, newLeft, TimeSpan.FromSeconds(0.50));
+                    anim1.FillBehavior = FillBehavior.Stop;
+                    anim1.Completed += (s, e) => Canvas.SetLeft(Image_Pin, newLeft);
+                    DoubleAnimation anim2 = new DoubleAnimation(currentTop, newTop, TimeSpan.FromSeconds(0.50));
+                    anim2.FillBehavior = FillBehavior.Stop;
+                    anim2.Completed += (s, e) => Canvas.SetTop(Image_Pin, newTop);
+
+                    trans.BeginAnimation(TranslateTransform.XProperty, anim1);
+                    trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+                } else
+                {
+                    //MessageBox.Show("Setting Left");
+
+                    // Move pin
+                    Canvas.SetLeft(Image_Pin, newLeft);
+                    //MessageBox.Show("Setting Top");
+                    Canvas.SetTop(Image_Pin, newTop);
+                    //MessageBox.Show("done!");
+                }
+
             }
 
         }

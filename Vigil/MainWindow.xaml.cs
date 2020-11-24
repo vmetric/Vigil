@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Timers;
 using System;
+using System.Threading;
 
 namespace Vigil
 {
@@ -88,8 +89,8 @@ namespace Vigil
             liveMap.Update(simpleDevice.data.loc);
 
             // UpdateLiveMap every second
-            int updateInterval = 1000;
-            Timer updateLiveMapTimer = new Timer(updateInterval);
+            int updateInterval = 2500;
+            System.Timers.Timer updateLiveMapTimer = new System.Timers.Timer(updateInterval);
             updateLiveMapTimer.Elapsed += UpdateLiveMap;
             updateLiveMapTimer.AutoReset = true;
             updateLiveMapTimer.Start();
