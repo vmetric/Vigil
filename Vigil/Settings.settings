@@ -1,15 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Vigil" GeneratedClassName="UserSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Vigil" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="animatePins" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="animatePinsDefault" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
     <Setting Name="animationDurationSeconds" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.5</Value>
+      <Value Profile="(Default)">0.25</Value>
+    </Setting>
+    <Setting Name="animationDurationSecondsDefault" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.25</Value>
     </Setting>
     <Setting Name="updateInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2000</Value>
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="updateIntervalDefault" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

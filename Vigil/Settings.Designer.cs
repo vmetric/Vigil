@@ -37,7 +37,19 @@ namespace Vigil {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool animatePinsDefault {
+            get {
+                return ((bool)(this["animatePinsDefault"]));
+            }
+            set {
+                this["animatePinsDefault"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.25")]
         public double animationDurationSeconds {
             get {
                 return ((double)(this["animationDurationSeconds"]));
@@ -49,13 +61,37 @@ namespace Vigil {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.25")]
+        public double animationDurationSecondsDefault {
+            get {
+                return ((double)(this["animationDurationSecondsDefault"]));
+            }
+            set {
+                this["animationDurationSecondsDefault"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int updateInterval {
             get {
                 return ((int)(this["updateInterval"]));
             }
             set {
                 this["updateInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int updateIntervalDefault {
+            get {
+                return ((int)(this["updateIntervalDefault"]));
+            }
+            set {
+                this["updateIntervalDefault"] = value;
             }
         }
     }
