@@ -27,5 +27,12 @@ namespace Vigil
             TextBox_UpdateInterval.Text = Settings.Default.updateInterval.ToString();
 
         }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.animatePins = (bool)CheckBox_AnimatePinMovements.IsChecked;
+            Settings.Default.animationDurationSeconds = double.Parse(TextBox_AnimationDuration.Text);
+            Settings.Default.updateInterval = int.Parse(TextBox_UpdateInterval.Text);
+        }
     }
 }
