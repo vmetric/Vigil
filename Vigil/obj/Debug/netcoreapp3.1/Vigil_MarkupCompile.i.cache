@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\Matt\source\repos\Vigil\Vigil\App.xaml
-2815241387
+3572672761
 
-7-84252991
+10-1750101229
 1921654412462
-LiveMap.xaml;MainWindow.xaml;
+Windows\LiveMap.xaml;Windows\MainWindow.xaml;Windows\UserSettings.xaml;
 
-True
+False
 
