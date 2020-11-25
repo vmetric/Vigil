@@ -18,12 +18,11 @@ namespace Vigil
     /// </summary>
     public partial class LiveMap : Window
     {
-        static Settings settings = new Settings();
         // If true, the Pin will animate to new locations. If false, Pin jumps to new locations.
-        bool animatePins = settings.animatePins;
+        bool animatePins = Settings.Default.animatePins;
 
         // Time, in seconds, it takes Pin animations to complete.
-        double animationDurationSeconds = settings.animationDurationSeconds;
+        double animationDurationSeconds = Settings.Default.animationDurationSeconds;
 
         // Dictionary holding the coordinates of each location. Current hardcoded.
         readonly Dictionary<string, (int, int)> locationCoordinates = new Dictionary<string, (int, int)>()
@@ -58,14 +57,14 @@ namespace Vigil
                     Storyboard storyboard = new Storyboard();
 
                     // Anim1 is responsible for left-right movement (using "distance from left")
-                    DoubleAnimation anim1 = new DoubleAnimation(currentLeft, newLeft, TimeSpan.FromSeconds(animationDurationSecond));
+                    DoubleAnimation anim1 = new DoubleAnimation(currentLeft, newLeft, TimeSpan.FromSeconds(animationDurationSeconds));
                     anim1.FillBehavior = FillBehavior.Stop;
                     anim1.Completed += (s, e) => Canvas.SetLeft(Image_Pin, newLeft);
                     Storyboard.SetTarget(anim1, Image_Pin);
                     Storyboard.SetTargetProperty(anim1, new PropertyPath(Canvas.LeftProperty));
                     storyboard.Children.Add(anim1);
                     // Anim2 is responsible for up-down movement (using "distance from top")
-                    DoubleAnimation anim2 = new DoubleAnimation(currentTop, newTop, TimeSpan.FromSeconds(animationDurationSecond));
+                    DoubleAnimation anim2 = new DoubleAnimation(currentTop, newTop, TimeSpan.FromSeconds(animationDurationSeconds));
                     anim2.FillBehavior = FillBehavior.Stop;
                     anim2.Completed += (s, e) => Canvas.SetTop(Image_Pin, newTop);
                     Storyboard.SetTarget(anim2, Image_Pin);

@@ -15,8 +15,6 @@ namespace Vigil
     /// </summary>
     public partial class MainWindow : Window
     {
-        static Settings settings = new Settings();
-
         // Strings to hold input from TextBoxes
         // TODO replace textboxes with dropdowns, populated upon clicking a "connect to server button"
         string serverAddress;
@@ -29,7 +27,7 @@ namespace Vigil
         string uri = "";
 
         // UpdateLiveMap every X milliseconds
-        int updateInterval = settings.updateInterval;
+        int updateInterval = Settings.Default.updateInterval;
 
         // Dictionary holding FIND3 API calls
         // A function would likely work better, but for proof of concept, this should work.
