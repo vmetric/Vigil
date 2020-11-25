@@ -20,6 +20,12 @@ namespace Vigil
         public UserSettings()
         {
             InitializeComponent();
+
+            // Populate UserSettings with current settings.
+            CheckBox_AnimatePinMovements.IsChecked = Settings.Default.animatePins;
+            TextBox_AnimationDuration.Text = Settings.Default.animationDurationSeconds.ToString();
+            TextBox_UpdateInterval.Text = Settings.Default.updateInterval.ToString();
+
         }
     }
 }

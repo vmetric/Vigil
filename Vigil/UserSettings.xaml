@@ -25,19 +25,18 @@
                     <Style TargetType="{x:Type TextBox}">
                         <Setter Property="Margin" Value="{StaticResource textBoxMargin}"/>
                     </Style>
-
                     <Style TargetType="{x:Type Label}">
                         <Setter Property="Margin" Value="{StaticResource labelMargin}"/>
                     </Style>
                 </StackPanel.Resources>
 
-                <CheckBox Content="Animate Pin Movements" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox x:Name="CheckBox_AnimatePinMovements" Content="Animate Pin Movements" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Label Content="Duration of Pin Movement (seconds - decimal):" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox x:Name="TextBox_AnimationDuration" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Label Content="Update Frequency (milliseconds - whole number):" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox Text="" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox x:Name="TextBox_UpdateInterval" Text="" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
     </Grid>
