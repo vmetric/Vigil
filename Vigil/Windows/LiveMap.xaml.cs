@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading.Tasks;
+using System.IO;
+using System.Timers;
 
 namespace Vigil
 {
@@ -18,31 +23,61 @@ namespace Vigil
     /// </summary>
     public partial class LiveMap : Window
     {
-        // If true, the Pin will animate to new locations. If false, Pin jumps to new locations.
-        bool animatePins = Settings.Default.animatePins;
+        string deviceLocation; // Device's location.
+        string serverUri; // URI/L of FIND3 server.
+        SimpleLocationOfDevice deviceInfoSimple; // Simple version of device info from FIND3 server.
 
-        // Time, in seconds, it takes Pin animations to complete.
-        double animationDurationSeconds = Settings.Default.animationDurationSeconds;
-
-        // Dictionary holding the coordinates of each location. Current hardcoded.
-        readonly Dictionary<string, (int, int)> locationCoordinates = new Dictionary<string, (int, int)>()
+        bool animatePins = Settings.Default.animatePins; // If true, the Pin will animate to new locations. If false, Pin jumps to new locations.
+        double animationDurationSeconds = Settings.Default.animationDurationSeconds; // Time, in seconds, it takes Pin animations to complete.
+        int updateInterval = Settings.Default.updateInterval;
+        Dictionary<string, (int, int)> locationCoordinates = new Dictionary<string, (int, int)>()
         {
             { "bedroom", (116, 446) },
             { "bathroom", (448, 198) },
             { "living room", (1022, 428) }
-        };
+        }; // Holds the coordinates of each location. Currently hardcoded.
 
-        public LiveMap()
+        public LiveMap(string serverUri)
         {
             InitializeComponent();
-        }
 
-        public void Update(string newLocation)
+            this.serverUri = serverUri;
+            StartUpdating();
+        }
+        // Starts a timer to run Update.
+        private void StartUpdating()
         {
-            Label_Location.Content = newLocation;
-            MovePin(locationCoordinates[newLocation]);
+            Timer updateLiveMapTimer = new Timer(updateInterval);
+            updateLiveMapTimer.Elapsed += Update;
+            updateLiveMapTimer.AutoReset = true;
+            updateLiveMapTimer.Start();
         }
-
+        // Updates LiveMap.
+        public async void Update(object source, ElapsedEventArgs e)
+        {
+            await UpdateDeviceLocationAsync();
+            Dispatcher.Invoke(() => Label_Location.Content = deviceLocation);
+            Dispatcher.Invoke(() => MovePin(locationCoordinates[deviceLocation]));
+        }
+        // Updates deviceLocation when called.
+        private async Task UpdateDeviceLocationAsync()
+        {
+            if (serverUri != null && serverUri != "")
+            {
+                // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
+                deviceInfoSimple = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(serverUri));
+                // Update deviceLocation
+                deviceLocation = deviceInfoSimple.data.loc;
+            }
+        }
+        // Handles GET'ing from server.
+        private async Task<string> Get(string uri)
+        {
+            var httpClient = new HttpClient();
+            var stream = await httpClient.GetStreamAsync(uri).ConfigureAwait(false);
+            return (new StreamReader(stream).ReadToEnd());
+        }
+        // Handles movement of the pin.
         public void MovePin((int, int) newCoordinate)
         {
             var currentLeft = Canvas.GetLeft(Image_Pin);
