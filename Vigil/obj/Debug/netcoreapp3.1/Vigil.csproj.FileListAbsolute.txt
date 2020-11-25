@@ -4,16 +4,15 @@ C:\Users\Matt\source\repos\Vigil\Vigil\bin\Debug\netcoreapp3.1\Vigil.runtimeconf
 C:\Users\Matt\source\repos\Vigil\Vigil\bin\Debug\netcoreapp3.1\Vigil.runtimeconfig.dev.json
 C:\Users\Matt\source\repos\Vigil\Vigil\bin\Debug\netcoreapp3.1\Vigil.dll
 C:\Users\Matt\source\repos\Vigil\Vigil\bin\Debug\netcoreapp3.1\Vigil.pdb
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.csprojAssemblyReference.cache
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\LiveMap.g.cs
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\MainWindow.g.cs
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\UserSettings.g.cs
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Windows\LiveMap.g.cs
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Windows\MainWindow.g.cs
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Windows\UserSettings.g.cs
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil_MarkupCompile.cache
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil_MarkupCompile.lref
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\LiveMap.baml
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\MainWindow.baml
-C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\UserSettings.baml
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Windows\LiveMap.baml
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Windows\MainWindow.baml
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Windows\UserSettings.baml
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.g.resources
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.AssemblyInfoInputs.cache
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.AssemblyInfo.cs
@@ -21,3 +20,4 @@ C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.csproj.Core
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.dll
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.pdb
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.genruntimeconfig.cache
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.csprojAssemblyReference.cache
