@@ -129,5 +129,10 @@ namespace Vigil
                 liveMap.Update("Err: deviceName empty");
             }
         }
+
+        private void Toolbar_Settings_Clicked(object sender, RoutedEventArgs e)
+        {
+            new UserSettings().Show();
+        }
     }
 }

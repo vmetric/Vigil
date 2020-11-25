@@ -11,51 +11,51 @@
         <Thickness x:Key="labelMargin">0,5,0,0</Thickness>
         <Thickness x:Key="buttonMargin">0,20,0,0</Thickness>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Margin" Value="{StaticResource textBoxMargin}"/>
-                    </Style>
-                    <Style TargetType="{x:Type Label}">
-                        <Setter Property="Margin" Value="{StaticResource labelMargin}"/>
-                    </Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Margin" Value="{StaticResource buttonMargin}"/>
-                    </Style>
-                </StackPanel.Resources>
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="Settings" Click="Toolbar_Settings_Clicked"/>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Margin" Value="{StaticResource textBoxMargin}"/>
+                        </Style>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Margin" Value="{StaticResource labelMargin}"/>
+                        </Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Margin" Value="{StaticResource buttonMargin}"/>
+                        </Style>
+                    </StackPanel.Resources>
 
-                <Grid>
-                    <Rectangle Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Panel.ZIndex="-1" Height="100" Stroke="Black" VerticalAlignment="Top" Width="292" Fill="#FFA8C64E"/>
-                    <TextBlock Grid.Column="0" Grid.Row="0" x:Name="TextBlock_MainDisplay" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" Width="274" TextAlignment="Center" Height="28" FontFamily="Agency FB"/>
-                </Grid>
+                    <Grid>
+                        <Rectangle HorizontalAlignment="Center" Panel.ZIndex="-1" Height="100" Stroke="Black" VerticalAlignment="Top" Width="292" Fill="#FFA8C64E"/>
+                        <TextBlock x:Name="TextBlock_MainDisplay" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" Width="274" TextAlignment="Center" Height="28" FontFamily="Agency FB"/>
+                    </Grid>
 
-                <Label Content="Server Address (include http/https):" FontSize="18"/>
-                <TextBox x:Name="TextBox_ServerAddress" ToolTip="e.g., https://cloud.internalpositioning.com" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
+                    <Label Content="Server Address (include http/https):" FontSize="18"/>
+                    <TextBox x:Name="TextBox_ServerAddress" ToolTip="e.g., https://cloud.internalpositioning.com" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
 
-                <Label Content="Family Name:" FontSize="18"/>
-                <TextBox x:Name="TextBox_FamilyName" ToolTip="e.g., myfamily" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
+                    <Label Content="Family Name:" FontSize="18"/>
+                    <TextBox x:Name="TextBox_FamilyName" ToolTip="e.g., myfamily" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
 
-                <Label Content="Device Name:" FontSize="18"/>
-                <TextBox x:Name="TextBox_DeviceName" ToolTip="e.g., mydevice" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
+                    <Label Content="Device Name:" FontSize="18"/>
+                    <TextBox x:Name="TextBox_DeviceName" ToolTip="e.g., mydevice" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="34" FontSize="20"/>
 
-                <Button x:Name="Button_GetDeviceLocation" Content="Get Device Location" HorizontalAlignment="Center" Height="43" Width="177" FontSize="18" Click="Button_GetDeviceLocation_Click"/>
+                    <Button x:Name="Button_GetDeviceLocation" Content="Get Device Location" HorizontalAlignment="Center" Height="43" Width="177" FontSize="18" Click="Button_GetDeviceLocation_Click"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-        
-
-
-
-        
-
-        
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
