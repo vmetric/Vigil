@@ -20,9 +20,7 @@ namespace Vigil
         string serverAddress;
         string familyName;
         string deviceName;
-        string deviceLocation;
         LiveMap liveMap;
-        SimpleLocationOfDevice simpleDevice;
 
         string uri = "";
 
@@ -45,9 +43,9 @@ namespace Vigil
         private async void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
         {
             TextBlock_MainDisplay.Text = "Working...";
-            
-
             serverAddress = TextBox_ServerAddress.Text;
+            familyName = TextBox_FamilyName.Text;
+            deviceName = TextBox_DeviceName.Text;
 
             // If the first character of serverAddress is a number, it's safe to assume it's an IP address
             // And has been entered without http:// or https:// -- thus, we can add http:// to the front.
@@ -65,9 +63,6 @@ namespace Vigil
                 // TODO maybe better if we correct the URL anyway, then get a confirmation from the user that the address is correct? This could be a "settings" option for user to check/uncheck.
             }
 
-            familyName = TextBox_FamilyName.Text;
-            deviceName = TextBox_DeviceName.Text;
-
             // Start building uri by adding serverAddress
             uri += serverAddress;
             // If serverAddress does NOT end with a /, add it to uri
@@ -78,56 +73,11 @@ namespace Vigil
             // Add the simpleLocationOfSingleDevice API call location, family name, slash, and deviceName.
             uri += find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
 
-            // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
-            simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(uri));
-            // Save device location to variable
-            deviceLocation = simpleDevice.data.loc;
-
-            // Update MainDisplay with given device location.
-            TextBlock_MainDisplay.Text = $"Location Acquired: {deviceLocation}";
-
-            // Launch our LiveMap window, and give it our current location.
-            liveMap = new LiveMap();
+            // Launch our LiveMap window, and give it our freshly made URI.
+            liveMap = new LiveMap(uri);
             liveMap.Show();
-            liveMap.Update(simpleDevice.data.loc);
 
-
-            System.Timers.Timer updateLiveMapTimer = new System.Timers.Timer(updateInterval);
-            updateLiveMapTimer.Elapsed += UpdateLiveMap;
-            updateLiveMapTimer.AutoReset = true;
-            updateLiveMapTimer.Start();
             TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
-        }
-
-        // Simple method that handles GET'ing from server.
-        private async Task<string> Get(string uri)
-        {
-            var httpClient = new HttpClient();
-            var stream = await httpClient.GetStreamAsync(uri).ConfigureAwait(false);
-            return (new StreamReader(stream).ReadToEnd());
-        }
-
-        // Simple method to update deviceLocation
-        private async Task UpdateDeviceLocation()
-        {
-            // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
-            simpleDevice = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(uri));
-            // Save device location to variable
-            deviceLocation = simpleDevice.data.loc;
-        }
-
-        // Method meant to be used for updating the "live map"
-        private async void UpdateLiveMap(object source, ElapsedEventArgs e)
-        {
-            await UpdateDeviceLocation();
-
-            if (deviceName != "" || deviceName != null)
-            {
-                Dispatcher.Invoke(() => liveMap.Update($"{simpleDevice.data.loc}"));
-            } else
-            {
-                liveMap.Update("Err: deviceName empty");
-            }
         }
 
         private void Toolbar_Settings_Clicked(object sender, RoutedEventArgs e)
