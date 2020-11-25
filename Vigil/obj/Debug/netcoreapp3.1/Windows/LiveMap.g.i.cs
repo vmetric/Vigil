@@ -77,7 +77,7 @@ namespace Vigil {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Vigil;V1.0.0.0;component/windows/livemap.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Vigil;component/windows/livemap.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\LiveMap.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

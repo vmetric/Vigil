@@ -9,7 +9,7 @@
     <Window.Resources>
         <Thickness x:Key="textBoxMargin">0,0,0,0</Thickness>
         <Thickness x:Key="labelMargin">0,15,0,0</Thickness>
-        <Thickness x:Key="buttonMargin">0,20,0,0</Thickness>
+        <Thickness x:Key="buttonMargin">30,30,0,0</Thickness>
         <Thickness x:Key="buttonPadding">10,2,10,2</Thickness>
     </Window.Resources>
     
@@ -44,7 +44,11 @@
                 <Label Content="Update Frequency (milliseconds - whole number):" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBox x:Name="TextBox_UpdateInterval" Text="" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                <Button x:Name="Button_Save" Content="Save" HorizontalAlignment="Center" Height="Auto" Width="Auto" FontSize="18" Click="Button_Save_Click"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="Button_Save" Content="Save" HorizontalAlignment="Center" Height="Auto" Width="Auto" FontSize="18" Click="Button_Save_Click"/>
+                    <Button x:Name="Button_RestoreDefaults" Content="Restore Defaults" HorizontalAlignment="Center" Height="Auto" Width="Auto" FontSize="18" Click="Button_RestoreDefaults_Click"/>
+                </StackPanel>
+                
             </StackPanel>
         </Grid>
     </Grid>

@@ -30,9 +30,18 @@ namespace Vigil
 
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
+            // Save what the user entered to Settings.settings
             Settings.Default.animatePins = (bool)CheckBox_AnimatePinMovements.IsChecked;
             Settings.Default.animationDurationSeconds = double.Parse(TextBox_AnimationDuration.Text);
             Settings.Default.updateInterval = int.Parse(TextBox_UpdateInterval.Text);
+        }
+
+        private void Button_RestoreDefaults_Click(object sender, RoutedEventArgs e)
+        {
+            // Populate UserSettings with Default settings.
+            CheckBox_AnimatePinMovements.IsChecked = Settings.Default.animatePinsDefault;
+            TextBox_AnimationDuration.Text = Settings.Default.animationDurationSecondsDefault.ToString();
+            TextBox_UpdateInterval.Text = Settings.Default.updateIntervalDefault.ToString();
         }
     }
 }
