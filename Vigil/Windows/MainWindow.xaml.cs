@@ -20,7 +20,6 @@ namespace Vigil
         string serverAddress;
         string familyName;
         string deviceName;
-        LiveMap liveMap;
 
         string uri = "";
 
@@ -40,7 +39,7 @@ namespace Vigil
         }
 
         // Fires when Button_GetDeviceLocation is clicked
-        private async void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
+        private void Button_GetDeviceLocation_Click(object sender, RoutedEventArgs e)
         {
             TextBlock_MainDisplay.Text = "Working...";
             serverAddress = TextBox_ServerAddress.Text;
@@ -74,16 +73,9 @@ namespace Vigil
             uri += find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
 
             // Launch our LiveMap window, and give it our freshly made URI.
-            
-            liveMap = new LiveMap(uri);
-            liveMap.Show();
+            new LiveMap(uri).Show();
 
             TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
-        }
-
-        private void Toolbar_Settings_Clicked(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private void MenuItem_Settings_Clicked(object sender, RoutedEventArgs e)

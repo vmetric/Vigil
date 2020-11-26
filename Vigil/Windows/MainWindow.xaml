@@ -17,7 +17,6 @@
             <MenuItem Header="File">
                 <MenuItem Header="Settings" Click="MenuItem_Settings_Clicked"/>
             </MenuItem>
-            
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -67,7 +67,7 @@ namespace Vigil
                 // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
                 deviceInfoSimple = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(serverUri));
                 // Update deviceLocation
-                deviceLocation = deviceInfoSimple.data.loc;
+                deviceLocation = deviceInfoSimple.data.loc; // TODO for some reason, this line throws a Null exception after closing the first LiveMap window, and opening another.
             }
         }
         // Handles GET'ing from server.
