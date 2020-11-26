@@ -13,11 +13,12 @@
     </Window.Resources>
 
     <DockPanel>
-        <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar>
-                <Button Content="Settings" Click="Toolbar_Settings_Clicked"/>
-            </ToolBar>
-        </ToolBarTray>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Settings" Click="MenuItem_Settings_Clicked"/>
+            </MenuItem>
+            
+        </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

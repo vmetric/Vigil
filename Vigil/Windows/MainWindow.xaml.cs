@@ -74,6 +74,7 @@ namespace Vigil
             uri += find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
 
             // Launch our LiveMap window, and give it our freshly made URI.
+            
             liveMap = new LiveMap(uri);
             liveMap.Show();
 
@@ -81,6 +82,11 @@ namespace Vigil
         }
 
         private void Toolbar_Settings_Clicked(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void MenuItem_Settings_Clicked(object sender, RoutedEventArgs e)
         {
             new UserSettings().Show();
         }

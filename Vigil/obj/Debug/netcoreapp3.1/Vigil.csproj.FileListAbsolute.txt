@@ -20,3 +20,4 @@ C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.csproj.Core
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.dll
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.pdb
 C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.genruntimeconfig.cache
+C:\Users\Matt\source\repos\Vigil\Vigil\obj\Debug\netcoreapp3.1\Vigil.csprojAssemblyReference.cache
