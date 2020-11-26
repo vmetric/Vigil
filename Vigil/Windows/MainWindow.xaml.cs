@@ -1,12 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Timers;
-using System;
-using System.Threading;
 
 namespace Vigil
 {
@@ -22,9 +15,6 @@ namespace Vigil
         string deviceName;
 
         string uri = "";
-
-        // UpdateLiveMap every X milliseconds
-        int updateInterval = Settings.Default.updateInterval;
 
         // Dictionary holding FIND3 API calls
         // A function would likely work better, but for proof of concept, this should work.
@@ -45,7 +35,6 @@ namespace Vigil
             serverAddress = TextBox_ServerAddress.Text;
             familyName = TextBox_FamilyName.Text;
             deviceName = TextBox_DeviceName.Text;
-
             
             // If the first character of serverAddress is a number, it's safe to assume it's an IP address
             // And has been entered without http:// or https:// -- thus, we can add http:// to the front.
@@ -62,8 +51,6 @@ namespace Vigil
                 return;
                 // TODO maybe better if we correct the URL anyway, then get a confirmation from the user that the address is correct? This could be a "settings" option for user to check/uncheck.
             }
-
-
             // Start building uri by adding serverAddress
             uri += serverAddress;
             // If serverAddress does NOT end with a /, add it to uri
@@ -73,7 +60,6 @@ namespace Vigil
             }
             // Add the simpleLocationOfSingleDevice API call location, family name, slash, and deviceName.
             uri += find3ApiCalls["simpleLocationOfSingleDevice"] + familyName + "/" + deviceName;
-
             // Launch our LiveMap window, and give it our freshly made URI.
             new LiveMap(uri).Show();
             // Clear our URI; prevents our URI from being processed more than once (and becoming invalid/inappropiate/broken) if user closes & reopens LiveMap.
@@ -81,7 +67,6 @@ namespace Vigil
 
             TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
         }
-
         private void MenuItem_Settings_Clicked(object sender, RoutedEventArgs e)
         {
             new UserSettings().Show();
