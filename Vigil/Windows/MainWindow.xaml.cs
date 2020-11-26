@@ -46,6 +46,7 @@ namespace Vigil
             familyName = TextBox_FamilyName.Text;
             deviceName = TextBox_DeviceName.Text;
 
+            
             // If the first character of serverAddress is a number, it's safe to assume it's an IP address
             // And has been entered without http:// or https:// -- thus, we can add http:// to the front.
             // TODO verify if a GET request (below in Get()) will properly redirect from Http to Https
@@ -62,6 +63,7 @@ namespace Vigil
                 // TODO maybe better if we correct the URL anyway, then get a confirmation from the user that the address is correct? This could be a "settings" option for user to check/uncheck.
             }
 
+
             // Start building uri by adding serverAddress
             uri += serverAddress;
             // If serverAddress does NOT end with a /, add it to uri
@@ -74,6 +76,8 @@ namespace Vigil
 
             // Launch our LiveMap window, and give it our freshly made URI.
             new LiveMap(uri).Show();
+            // Clear our URI; prevents our URI from being processed more than once (and becoming invalid/inappropiate/broken) if user closes & reopens LiveMap.
+            uri = "";
 
             TextBlock_MainDisplay.Text = "updateLiveMapTimer is running";
         }

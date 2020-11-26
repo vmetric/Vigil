@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Threading.Tasks;
 using System.IO;
 using System.Timers;
+using System.ComponentModel;
 
 namespace Vigil
 {
@@ -26,6 +27,7 @@ namespace Vigil
         string deviceLocation; // Device's location.
         string serverUri; // URI/L of FIND3 server.
         SimpleLocationOfDevice deviceInfoSimple; // Simple version of device info from FIND3 server.
+        Timer updateLiveMapTimer; // Timer for handling periodic updates of the LiveMap.
 
         bool animatePins = Settings.Default.animatePins; // If true, the Pin will animate to new locations. If false, Pin jumps to new locations.
         double animationDurationSeconds = Settings.Default.animationDurationSeconds; // Time, in seconds, it takes Pin animations to complete.
@@ -40,14 +42,19 @@ namespace Vigil
         public LiveMap(string serverUri)
         {
             InitializeComponent();
+            Closing += OnWindowClosing;
 
             this.serverUri = serverUri;
             StartUpdating();
         }
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            updateLiveMapTimer.Stop();
+        }
         // Starts a timer to run Update.
         private void StartUpdating()
         {
-            Timer updateLiveMapTimer = new Timer(updateInterval);
+            updateLiveMapTimer = new Timer(updateInterval);
             updateLiveMapTimer.Elapsed += Update;
             updateLiveMapTimer.AutoReset = true;
             updateLiveMapTimer.Start();
@@ -67,7 +74,7 @@ namespace Vigil
                 // GET from server, Deserialize JSON data (that is, convert it into a class simpleDevice)
                 deviceInfoSimple = JsonSerializer.Deserialize<SimpleLocationOfDevice>(await @Get(serverUri));
                 // Update deviceLocation
-                deviceLocation = deviceInfoSimple.data.loc; // TODO for some reason, this line throws a Null exception after closing the first LiveMap window, and opening another.
+                deviceLocation = deviceInfoSimple.data.loc;
             }
         }
         // Handles GET'ing from server.
